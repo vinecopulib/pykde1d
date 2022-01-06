@@ -1,6 +1,6 @@
-[submodule "lib/kde1d-cpp"]
-	path = lib/kde1d-cpp
+[submodule "lib/kde1d"]
+	path = lib/kde1d
 	url = https://github.com/vinecopulib/kde1d-cpp
-[submodule "lib/eigen"]
+[submodule "eigen"]
 	path = lib/eigen
 	url = https://github.com/eigenteam/eigen-git-mirror
