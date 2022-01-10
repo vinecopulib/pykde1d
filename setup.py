@@ -124,10 +124,7 @@ class get_pybind_include(object):
 
 def get_include_paths():
   """Return the long description."""
-  include_dirs = [
-      'boost', 'eigen', 'eigen/unsupported', 'vinecopulib/include',
-      'wdm/include'
-  ]
+  include_dirs = ['boost', 'eigen', 'eigen/unsupported', 'kde1d/include']
   return ['lib/' + path for path in include_dirs]
 
 
@@ -151,7 +148,7 @@ def local_scheme(_):
 
 extract_boost()
 setup(
-    name='pyvinecopulib',
+    name='pykde1d',
     use_scm_version={'local_scheme': local_scheme},
     setup_requires=get_requirements()[0:3],
     install_requires=get_requirements(),
@@ -161,11 +158,11 @@ setup(
     description='A python interface to vinecopulib',
     long_description=get_long_description(),
     long_description_content_type='text/markdown',
-    url='https://github.com/vinecopulib/pyvinecopulib/',
+    url='https://github.com/vinecopulib/pykde1d/',
     license='MIT',
     ext_modules=[
         Extension(
-            'pyvinecopulib',
+            'pykde1d',
             ['src/main.cpp'],
             include_dirs=[
                 # Path to pybind11 headers
@@ -178,14 +175,7 @@ setup(
     cmdclass={'build_ext': BuildExt},
     zip_safe=False,
     classifiers=[
-        'Development Status :: 3 - Alpha',
-        'Intended Audience :: Financial and Insurance Industry',
-        'Intended Audience :: Healthcare Industry',
-        'Intended Audience :: Information Technology',
-        'Intended Audience :: Other Audience',
-        'Intended Audience :: Science/Research',
-        'Intended Audience :: Telecommunications Industry',
-        'Topic :: Scientific/Engineering',
+        'Development Status :: 3 - Alpha', 'Topic :: Scientific/Engineering',
         'Topic :: Scientific/Engineering :: Mathematics',
         'Programming Language :: C++', 'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
@@ -194,5 +184,5 @@ setup(
         'Programming Language :: Python :: 3.9',
         'License :: OSI Approved :: MIT License'
     ],
-    keywords='copula, vines copulas, pair-copulas constructions',
+    keywords='kernel density estimation, density estimation',
 )

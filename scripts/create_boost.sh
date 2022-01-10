@@ -12,7 +12,7 @@
 
 ## (1) Adjust these variables as needed
 ## -- repo where the boost will be packaged
-pkgdir="${HOME}/Dropbox/github/pyvinecopulib"
+pkgdir="${HOME}/Dropbox/github/pykde1d"
 ## -- repo where the boost sources are currently 
 srcdir="${HOME}/Downloads"
 ## -- current boost sources, placed eg in ${pkgdir}

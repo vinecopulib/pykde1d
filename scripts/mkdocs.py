@@ -100,7 +100,7 @@ SKIP_RECURSE_NAMES = [
 SKIP_RECURSE_EXCEPTIONS = [
     # TODO(eric.cousineau): Remove this once we figure out why not having
     # it breaks the doc generation process.
-    ('vinecopulib', 'multibody', 'internal'),
+    ('kde1d', 'multibody', 'internal'),
 ]
 
 # Filter based on partial names.
@@ -853,22 +853,22 @@ def choose_doc_var_names(symbols):
     nonlocal symbols, result
 
     for i, cursor in enumerate([s.cursor for s in symbols]):
-      if "@exclude_from_pyvinecopulib_mkdoc" in symbols[i].comment:
+      if "@exclude_from_pykde1d_mkdoc" in symbols[i].comment:
         # Allow the user to opt-out this symbol from the documentation.
         # This is useful when forming unique constexpr names is
         # otherwise very difficult.  (Sometimes, C++ has *many* more
-        # static-typing convenience overloads that pyvinecopulib really
+        # static-typing convenience overloads that pykde1d really
         # needs, such as various kinds of Eigen<> template magic.)
         result[i] = None
 
         continue
-      elif "@pyvinecopulib_mkdoc_identifier" in symbols[i].comment:
+      elif "@pykde1d_mkdoc_identifier" in symbols[i].comment:
         comment = symbols[i].comment
         # Allow the user to manually specify a doc_foo identifier.
-        match = re.search(r"@pyvinecopulib_mkdoc_identifier\{(.*?)\}", comment)
+        match = re.search(r"@pykde1d_mkdoc_identifier\{(.*?)\}", comment)
 
         if not match:
-          raise RuntimeError("Malformed pyvinecopulib_mkdoc_identifier in " +
+          raise RuntimeError("Malformed pykde1d_mkdoc_identifier in " +
                              comment)
         (identifier, ) = match.groups()
         result[i] = "doc_" + identifier
@@ -948,7 +948,7 @@ def choose_doc_var_names(symbols):
   if is_unique(result):
     if not any(result):
       # Always generate a constexpr when there are no overloads, even if
-      # it's empty.  That way, pyvinecopulib can refer to the constant and any
+      # it's empty.  That way, pykde1d can refer to the constant and any
       # future (single) API comment added to C++ will work automatically.
       result[0] = "doc"
 
@@ -1054,7 +1054,7 @@ def print_symbols(f, name, node, level=0):
     if doc_var is None:
       continue
     assert name_chain == symbol.name_chain
-    comment = re.sub(r'@pyvinecopulib_mkdoc[a-z_]*\{.*\}', '', symbol.comment)
+    comment = re.sub(r'@pykde1d_mkdoc[a-z_]*\{.*\}', '', symbol.comment)
     delim = "\n"
 
     if "\n" not in comment and len(comment) < 40:
@@ -1130,7 +1130,7 @@ def main():
 
   quiet = False
   std = '-std=c++11'
-  root_name = 'pyvinecopulib_doc'
+  root_name = 'pykde1d_doc'
   ignore_patterns = []
   output_filename = None
 
