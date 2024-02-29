@@ -244,9 +244,10 @@ def extract_comment(cursor, deprecations):
   message = "".join([x[1:-1] for x in tokens[4:-1]])
 
   # Append the deprecation text.
-  result += (" (Deprecated.) \deprecated {} " +
-             "This will be removed from vinecopulib on or after {}.").format(
-                 message, removal_date)
+  result += (
+    " (Deprecated.) \deprecated {} "
+    + "This will be removed from kde1d on or after {}."
+  ).format(message, removal_date)
 
   return result
 
@@ -417,7 +418,7 @@ def process_comment(comment):
              s,
              flags=re.DOTALL)
 
-  # vinecopulib-specific Doxygen aliases.
+  # kde1d-specific Doxygen aliases.
   s = re.sub(r'[@\\]default\s+', r'\n$*Default:* ', s)
 
   # Remove these commands that take no argument. Ordering is significant for
@@ -868,8 +869,7 @@ def choose_doc_var_names(symbols):
         match = re.search(r"@pykde1d_mkdoc_identifier\{(.*?)\}", comment)
 
         if not match:
-          raise RuntimeError("Malformed pykde1d_mkdoc_identifier in " +
-                             comment)
+          raise RuntimeError("Malformed pykde1d_mkdoc_identifier in " + comment)
         (identifier, ) = match.groups()
         result[i] = "doc_" + identifier
 
@@ -1054,7 +1054,7 @@ def print_symbols(f, name, node, level=0):
     if doc_var is None:
       continue
     assert name_chain == symbol.name_chain
-    comment = re.sub(r'@pykde1d_mkdoc[a-z_]*\{.*\}', '', symbol.comment)
+    comment = re.sub(r"@pykde1d_mkdoc[a-z_]*\{.*\}", "", symbol.comment)
     delim = "\n"
 
     if "\n" not in comment and len(comment) < 40:
@@ -1123,14 +1123,14 @@ def main():
         parameters.append('-isysroot')
         parameters.append(sdkroot)
   elif platform.system() == 'Linux':
-    library_file = '/usr/lib/x86_64-linux-gnu/libclang.so'
+    library_file = "/usr/lib/x86_64-linux-gnu/libclang-16.so"
 
   if library_file and os.path.exists(library_file):
     cindex.Config.set_library_path(os.path.dirname(library_file))
 
   quiet = False
   std = '-std=c++11'
-  root_name = 'pykde1d_doc'
+  root_name = "pykde1d_doc"
   ignore_patterns = []
   output_filename = None
 

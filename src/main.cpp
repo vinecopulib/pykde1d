@@ -23,22 +23,30 @@ PYBIND11_MODULE(pykde1d, pk)
   )pbdoc";
 
   py::class_<Kde1d>(pk, "Kde1d", kde1d_doc.doc)
-    .def(py::init<double, double, double, double, size_t>(),
-         py::arg("bw") = NAN,
-         py::arg("mult") = 1.0,
+    .def(py::init<size_t, double, double, double, double, size_t>(),
+         py::arg("nlevels") = 0,
          py::arg("xmin") = NAN,
          py::arg("xmax") = NAN,
+         py::arg("multiplier") = 1.0,
+         py::arg("bandwidth") = NAN,
          py::arg("deg") = 2,
-         kde1d_doc.ctor.doc_5args)
-    .def_property_readonly("bw", &Kde1d::get_bw, "The kernel's bandwidth.")
+         kde1d_doc.ctor.doc_6args)
     .def_property_readonly(
-      "mult", &Kde1d::get_mult, "The kernel's bandwidth multiplier.")
-    .def_property_readonly(
-      "deg", &Kde1d::get_deg, "The local likelihood approximation's degree.")
+      "nlevels",
+      &Kde1d::get_xmin,
+      "The number of levels for discrete data (0 means continuous).")
     .def_property_readonly(
       "xmin", &Kde1d::get_xmin, "The lower bound of the support.")
     .def_property_readonly(
       "xmax", &Kde1d::get_xmax, "The upper bound of the support.")
+    .def_property_readonly("multiplier",
+                           &Kde1d::get_multiplier,
+                           "The kernel's bandwidth multiplier.")
+    .def_property_readonly(
+      "bandwidth", &Kde1d::get_bandwidth, "The kernel's bandwidth.")
+    .def_property_readonly("degree",
+                           &Kde1d::get_degree,
+                           "The local likelihood approximation's degree.")
     .def_property_readonly(
       "edf",
       &Kde1d::get_edf,
@@ -50,40 +58,28 @@ PYBIND11_MODULE(pykde1d, pk)
          [](const Kde1d& kde1d) { return "<pykde1d.Kde1d>\n" + kde1d.str(); })
     .def("str", &Kde1d::str, kde1d_doc.str.doc)
     .def("pdf",
-         static_cast<Eigen::VectorXd (Kde1d::*)(const Eigen::VectorXd&) const>(
-           &Kde1d::pdf),
+         &Kde1d::pdf,
          py::arg("x"),
-         kde1d_doc.pdf.doc)
-    .def("pdf",
-         static_cast<Eigen::VectorXd (Kde1d::*)(const Eigen::VectorXi&) const>(
-           &Kde1d::pdf),
-         py::arg("x"),
+         py::arg("check_fitted") = true,
          kde1d_doc.pdf.doc)
     .def("cdf",
-         static_cast<Eigen::VectorXd (Kde1d::*)(const Eigen::VectorXd&) const>(
-           &Kde1d::cdf),
+         &Kde1d::cdf,
          py::arg("x"),
+         py::arg("check_fitted") = true,
          kde1d_doc.cdf.doc)
-    .def("cdf",
-         static_cast<Eigen::VectorXd (Kde1d::*)(const Eigen::VectorXi&) const>(
-           &Kde1d::cdf),
+    .def("quantile",
+         &Kde1d::quantile,
          py::arg("x"),
-         kde1d_doc.cdf.doc)
-    .def("quantile", &Kde1d::quantile, py::arg("x"), kde1d_doc.quantile.doc)
+         py::arg("check_fitted") = true,
+         kde1d_doc.quantile.doc)
     .def("simulate",
          &Kde1d::simulate,
          py::arg("n"),
          py::arg("seeds") = std::vector<int>(),
+         py::arg("check_fitted") = true,
          kde1d_doc.simulate.doc)
     .def("fit",
-         static_cast<void (Kde1d::*)(const Eigen::VectorXd&,
-                                     const Eigen::VectorXd&)>(&Kde1d::fit),
-         py::arg("data"),
-         py::arg("weights") = Eigen::VectorXd(),
-         kde1d_doc.fit.doc)
-    .def("fit",
-         static_cast<void (Kde1d::*)(const Eigen::VectorXi&,
-                                     const Eigen::VectorXd&)>(&Kde1d::fit),
+         &Kde1d::fit,
          py::arg("data"),
          py::arg("weights") = Eigen::VectorXd(),
          kde1d_doc.fit.doc);

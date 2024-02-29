@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools>=64.0.0", "setuptools_scm>=8.0.0", "pybind11>=2.10.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pykde1d"
+dynamic = ["version"]
+authors = [
+  { name="Thibault Vatter", email="info@vinecopulib.com" },
+  { name="Thomas Nagler", email="info@vinecopulib.com" },
+]
+description = "A python interface to kde1d"
+readme = "README.md"
+license = {file = "LICENSE"}
+requires-python = ">=3.8"
+keywords = ['kernel density estimation', 'nonparametric statistics']
+classifiers = [
+        'Development Status :: 3 - Alpha',
+        'Topic :: Scientific/Engineering',
+        'Topic :: Scientific/Engineering :: Mathematics',
+        'Programming Language :: C++',
+        'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10',
+        'Programming Language :: Python :: 3.11',
+        'Programming Language :: Python :: 3.12',
+        'License :: OSI Approved :: MIT License'
+]
+dependencies = [
+  'pybind11>=2.10.0',
+  'setuptools>=64.0.0',
+  'setuptools_scm>=8.0.0',
+  'numpy>=1.14'
+]
+
+[tool.setuptools_scm]
+version_scheme = "python-simplified-semver"
+local_scheme = "no-local-version"
+
+[project.urls]
+Homepage = "https://github.com/vinecopulib/pykde1d/"
+Documentation = "https://vinecopulib.github.io/pykde1d"
+Repository = "https://github.com/vinecopulib/pykde1d.git"
+Issues = "https://github.com/vinecopulib/pykde1d/issues"
+
+[tool.pytest.ini_options]
+pythonpath = [
+  "src"
+]
