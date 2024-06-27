@@ -14,9 +14,7 @@ dependencies:
   - eigen
   - libboost-python-devel
   - clang
-  - clangxx
   - libclang
-  - libcxx
   - pip
   - pip:
     - pybind11_mkdoc

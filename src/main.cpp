@@ -6,9 +6,6 @@
 
 namespace py = pybind11;
 
-template<typename... Args>
-using overload_cast_ = pybind11::detail::overload_cast_impl<Args...>;
-
 using namespace kde1d;
 
 PYBIND11_MODULE(pykde1d, pk)
