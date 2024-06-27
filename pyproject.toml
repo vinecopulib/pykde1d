@@ -27,9 +27,6 @@ classifiers = [
         'License :: OSI Approved :: MIT License'
 ]
 dependencies = [
-  'pybind11>=2.10.0',
-  'setuptools>=64.0.0',
-  'setuptools_scm>=8.0.0',
   'numpy>=1.14'
 ]
 
@@ -47,3 +44,7 @@ Issues = "https://github.com/vinecopulib/pykde1d/issues"
 pythonpath = [
   "src"
 ]
+
+[tool.cibuildwheel]
+test-requires = "pytest"
+test-command = "pytest {project}/tests -r a"
