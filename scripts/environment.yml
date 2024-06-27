@@ -1,0 +1,22 @@
+name: pykde1d311
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - build
+  - wheel
+  - ruff
+  - setuptools >=64.0.0
+  - setuptools-scm >=8.0.0
+  - pybind11 >=2.10.0
+  - numpy >=1.14
+  - pytest
+  - eigen
+  - libboost-python-devel
+  - clang
+  - clangxx
+  - libclang
+  - libcxx
+  - pip
+  - pip:
+    - pybind11_mkdoc
