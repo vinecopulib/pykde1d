@@ -12,16 +12,16 @@ jobs:
       fail-fast: false
       matrix:
         # macos-13 is an intel runner, macos-14 is apple silicon
-        python: [38, 39, 310, 311, 312]
+        python: [38] #, 39, 310, 311, 312]
         cfg:
           - { os: ubuntu-latest, cibw_id: manylinux_x86_64,   name: GNU,    cc: gcc,   cxx: g++,     platform: x64, root_install_dir: '/home/runner/work'}
-          - { os: ubuntu-latest, cibw_id: manylinux_i686,   name: GNU,    cc: gcc,   cxx: g++,     platform: x64, root_install_dir: '/home/runner/work'}
-          - { os: ubuntu-latest, cibw_id: musllinux_x86_64,   name: GNU,    cc: gcc,   cxx: g++,     platform: x64, root_install_dir: '/home/runner/work'}
-          - { os: ubuntu-latest, cibw_id: musllinux_i686,   name: GNU,    cc: gcc,   cxx: g++,     platform: x64, root_install_dir: '/home/runner/work'}
-          - { os: macos-13,    cibw_id: macosx_x86_64, name: Clang,  cc: clang, cxx: clang++, platform: x64, root_install_dir: '/Users/runner/work'} # intel runner
-          - { os: macos-14,    cibw_id: macosx_arm64, name: Clang,  cc: clang, cxx: clang++, platform: x64, root_install_dir: '/Users/runner/work'} # apple silicon runner
-          - { os: windows-latest,  cibw_id: win32, name: x32, cc: cl,    cxx: cl,      platform: x32, root_install_dir: 'D:\'}
-          - { os: windows-latest,  cibw_id: win_amd64, name: x64, cc: cl,    cxx: cl,      platform: x64, root_install_dir: 'D:\'}
+          # - { os: ubuntu-latest, cibw_id: manylinux_i686,   name: GNU,    cc: gcc,   cxx: g++,     platform: x64, root_install_dir: '/home/runner/work'}
+          # - { os: ubuntu-latest, cibw_id: musllinux_x86_64,   name: GNU,    cc: gcc,   cxx: g++,     platform: x64, root_install_dir: '/home/runner/work'}
+          # - { os: ubuntu-latest, cibw_id: musllinux_i686,   name: GNU,    cc: gcc,   cxx: g++,     platform: x64, root_install_dir: '/home/runner/work'}
+          # - { os: macos-13,    cibw_id: macosx_x86_64, name: Clang,  cc: clang, cxx: clang++, platform: x64, root_install_dir: '/Users/runner/work'} # intel runner
+          # - { os: macos-14,    cibw_id: macosx_arm64, name: Clang,  cc: clang, cxx: clang++, platform: x64, root_install_dir: '/Users/runner/work'} # apple silicon runner
+          # - { os: windows-latest,  cibw_id: win32, name: x32, cc: cl,    cxx: cl,      platform: x32, root_install_dir: 'D:\'}
+          # - { os: windows-latest,  cibw_id: win_amd64, name: x64, cc: cl,    cxx: cl,      platform: x64, root_install_dir: 'D:\'}
     env:
       PYTHON_VENV_ROOT: ${{github.workspace}}/src/python-venv
 
