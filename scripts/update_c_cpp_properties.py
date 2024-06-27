@@ -55,7 +55,7 @@ def update_c_cpp_properties():
           f"{clang_include_path}/**",
         ],
         "defines": [],
-        "compilerPath": f"{conda_prefix}/bin/clang",
+        "compilerPath": "/usr/bin/clang",
         "cStandard": "c17",
         "cppStandard": "c++14",
         "intelliSenseMode": "linux-clang-x64",
