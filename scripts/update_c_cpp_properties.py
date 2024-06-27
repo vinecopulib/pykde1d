@@ -57,6 +57,18 @@ def update_c_cpp_properties():
           f"{conda_prefix}/include/python{python_version.split('.')[0]}.{python_version.split('.')[1]}",
           f"{conda_prefix}/include/c++/v1",
         ],
+        "browse": {
+          "path": [
+            "${workspaceFolder}/**",
+            f"{conda_prefix}/include",
+            f"{conda_prefix}/include/eigen3",
+            clang_include_path,
+            f"{conda_prefix}/include/python{python_version.split('.')[0]}.{python_version.split('.')[1]}",
+            f"{conda_prefix}/include/c++/v1",
+          ],
+          "limitSymbolsToIncludedHeaders": True,
+          "databaseFilename": "${workspaceFolder}/.vscode/browse.vc.db",
+        },
         "defines": [],
         "compilerPath": f"{conda_prefix}/bin/clang",
         "cStandard": "c17",

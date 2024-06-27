@@ -36,7 +36,8 @@ jobs:
         submodules: recursive
     - name: Get history and tags for SCM versioning to work
       run: |
-        git fetch --depth=1 origin +refs/tags/*:refs/tags/*
+        git fetch --prune --unshallow
+        # git fetch --depth=1 origin +refs/tags/*:refs/tags/*
     - name: Install dependencies
       id: install-dependencies
       uses: vinecopulib/vinecopulib/.github/actions/install-dependencies@better-actions
@@ -83,7 +84,8 @@ jobs:
         submodules: recursive
     - name: Get history and tags for SCM versioning to work
       run: |
-        git fetch --depth=1 origin +refs/tags/*:refs/tags/*
+        git fetch --prune --unshallow
+        # git fetch --depth=1 origin +refs/tags/*:refs/tags/*
     - name: Install dependencies
       id: install-dependencies
       uses: vinecopulib/vinecopulib/.github/actions/install-dependencies@better-actions
